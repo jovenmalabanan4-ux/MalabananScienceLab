@@ -1,0 +1,2025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malabanan Science Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        header {
+            padding: 24px 32px;
+            display: flex;
+            justify-content: flex-start;
+            position: relative;
+            z-index: 10;
+        }
+
+        nav {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background-color: #ffffff;
+            color: #000000;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: #e2e2e2;
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.active {
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.35);
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 20px 64px;
+            position: relative;
+        }
+
+        .center-stage {
+            flex: 1;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Introduction Section */
+        .intro-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .intro-wrapper::before {
+            content: "";
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0) 70%);
+            border-radius: 50%;
+            z-index: 0;
+            pointer-events: none;
+            animation: pulseGlow 6s ease-in-out infinite alternate;
+        }
+
+        .glass-card {
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 28px;
+            padding: 48px 56px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            animation: cardReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, 0.32);
+        }
+
+        .site-title {
+            font-size: clamp(2.4rem, 5.5vw, 4.5rem);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 16px;
+            opacity: 0;
+            animation: textSlideUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
+        }
+
+        .student-info {
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: #d4d4d4;
+            line-height: 1.6;
+            opacity: 0;
+            animation: textSlideUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.45s forwards;
+        }
+
+        /* Home Dashboard Section */
+        .home-wrapper {
+            width: 100%;
+            max-width: 920px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            text-align: left;
+            animation: cardReveal 0.5s ease forwards;
+        }
+
+        .home-hero {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 24px;
+            padding: 32px 36px;
+        }
+
+        .home-title {
+            font-size: clamp(1.8rem, 3.8vw, 2.5rem);
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .home-subtitle {
+            color: #cccccc;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .home-stats {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .stat-pill {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 999px;
+            padding: 8px 16px;
+            font-size: 0.88rem;
+            font-weight: 700;
+        }
+
+        .home-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+        }
+
+        .home-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 20px;
+            padding: 24px;
+            text-decoration: none;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 14px;
+            transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+        }
+
+        .home-card:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.09);
+            border-color: rgba(255, 255, 255, 0.35);
+        }
+
+        .home-card-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .home-card-desc {
+            font-size: 0.92rem;
+            color: #c8c8c8;
+            line-height: 1.5;
+        }
+
+        .home-card-cta {
+            font-size: 0.88rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .home-panels {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 18px;
+        }
+
+        .home-box {
+            background: #0a0a0a;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 26px;
+        }
+
+        .home-box-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 14px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+        }
+
+        .term-roadmap {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .roadmap-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            font-size: 0.93rem;
+        }
+
+        .roadmap-badge {
+            font-size: 0.76rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: #ffffff;
+            color: #000000;
+            white-space: nowrap;
+        }
+
+        .roadmap-badge.upcoming {
+            background: rgba(255, 255, 255, 0.14);
+            color: #d4d4d4;
+        }
+
+        .fact-display {
+            background: rgba(255, 255, 255, 0.06);
+            border-left: 3px solid #ffffff;
+            border-radius: 0 12px 12px 0;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .fact-topic {
+            font-size: 0.78rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #bdbdbd;
+            margin-bottom: 6px;
+        }
+
+        .fact-text {
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 1.55;
+            color: #ffffff;
+        }
+
+        /* Shared Upper-Middle Term Buttons (Notes & Game) */
+        .notes-wrapper, .game-wrapper {
+            width: 100%;
+            max-width: 920px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: cardReveal 0.45s ease forwards;
+        }
+
+        .term-bar {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 4px;
+            margin-bottom: 24px;
+        }
+
+        .term-btn {
+            background-color: #000000;
+            color: #ffffff;
+            border: 1.5px solid #ffffff;
+            padding: 10px 24px;
+            border-radius: 999px;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .term-btn:hover {
+            background-color: rgba(255, 255, 255, 0.14);
+            transform: translateY(-2px);
+        }
+
+        .term-btn.active {
+            background-color: #ffffff;
+            color: #000000;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
+        }
+
+        /* Question Count Selector Bar (10 / 20 / 30 Questions) */
+        .count-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+
+        .count-label {
+            font-size: 0.86rem;
+            font-weight: 700;
+            color: #bdbdbd;
+            margin-right: 4px;
+        }
+
+        .count-btn {
+            background: rgba(255, 255, 255, 0.06);
+            color: #ffffff;
+            border: 1.5px solid rgba(255, 255, 255, 0.35);
+            padding: 8px 18px;
+            border-radius: 999px;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .count-btn:hover {
+            border-color: #ffffff;
+            background: rgba(255, 255, 255, 0.16);
+            transform: translateY(-2px);
+        }
+
+        .count-btn.active {
+            background: #ffffff;
+            color: #000000;
+            border-color: #ffffff;
+            box-shadow: 0 6px 18px rgba(255, 255, 255, 0.22);
+        }
+
+        .term-panel {
+            display: none;
+            width: 100%;
+        }
+
+        .term-panel.active {
+            display: block;
+            animation: panelSlideIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        /* Notes Wikipedia Layout */
+        .wiki-article {
+            width: 100%;
+            background: #0a0a0a;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 16px;
+            padding: 36px 40px;
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65);
+        }
+
+        .wiki-header {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.24);
+            padding-bottom: 16px;
+            margin-bottom: 24px;
+        }
+
+        .wiki-kicker {
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 1.4px;
+            color: #b3b3b3;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .wiki-title {
+            font-size: clamp(1.75rem, 3.6vw, 2.5rem);
+            font-weight: 800;
+            letter-spacing: -0.3px;
+            line-height: 1.2;
+            margin-bottom: 6px;
+        }
+
+        .wiki-subtitle {
+            font-size: 0.98rem;
+            color: #cfcfcf;
+            font-weight: 600;
+        }
+
+        .wiki-toc {
+            background: #121212;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 16px 22px;
+            margin-bottom: 30px;
+            max-width: 440px;
+        }
+
+        .wiki-toc-title {
+            font-size: 0.95rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+        }
+
+        .wiki-toc ol {
+            padding-left: 20px;
+            display: grid;
+            gap: 6px;
+            font-size: 0.95rem;
+        }
+
+        .wiki-toc a {
+            color: #ffffff;
+            text-decoration: none;
+            border-bottom: 1px dotted rgba(255, 255, 255, 0.45);
+        }
+
+        .wiki-toc a:hover {
+            border-bottom-style: solid;
+        }
+
+        .wiki-section {
+            margin-top: 28px;
+            scroll-margin-top: 24px;
+        }
+
+        .wiki-h2 {
+            font-size: 1.45rem;
+            font-weight: 800;
+            padding-bottom: 6px;
+            margin-bottom: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+        }
+
+        .wiki-h3 {
+            font-size: 1.12rem;
+            font-weight: 800;
+            margin-top: 18px;
+            margin-bottom: 8px;
+            color: #f5f5f5;
+        }
+
+        .wiki-p {
+            color: #e2e2e2;
+            line-height: 1.7;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+
+        .wiki-list, .wiki-olist {
+            padding-left: 24px;
+            margin-bottom: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+            color: #e2e2e2;
+            line-height: 1.65;
+        }
+
+        .wiki-list li::marker {
+            color: #ffffff;
+        }
+
+        .wiki-box {
+            background: #141414;
+            border-left: 3px solid #ffffff;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            border-right: 1px solid rgba(255, 255, 255, 0.12);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 0 10px 10px 0;
+            padding: 14px 18px;
+            margin: 14px 0 18px;
+        }
+
+        .wiki-box-label {
+            font-size: 0.78rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #bdbdbd;
+            margin-bottom: 6px;
+        }
+
+        .formula-line {
+            font-weight: 700;
+            color: #ffffff;
+            margin: 4px 0;
+            font-size: 1rem;
+        }
+
+        .wiki-divider {
+            border: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.22);
+            margin: 34px 0 26px;
+        }
+
+        .placeholder-box {
+            text-align: center;
+            padding: 48px 20px;
+            border: 1px dashed rgba(255, 255, 255, 0.28);
+            border-radius: 12px;
+            color: #cfcfcf;
+        }
+
+        /* Game Quiz Card & Buttons */
+        .quiz-card {
+            width: 100%;
+            max-width: 740px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            padding: 36px 40px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65);
+        }
+
+        .quiz-top-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #c7c7c7;
+        }
+
+        .quiz-topic-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            color: #ffffff;
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.14);
+            border-radius: 999px;
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 10%;
+            background: #ffffff;
+            border-radius: 999px;
+            transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .question-box {
+            animation: textSlideUp 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .quiz-question {
+            font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+            font-weight: 800;
+            line-height: 1.4;
+            margin-bottom: 22px;
+            color: #ffffff;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .option-btn {
+            position: relative;
+            width: 100%;
+            text-align: left;
+            background: #0d0d0d;
+            color: #ffffff;
+            border: 1.5px solid rgba(255, 255, 255, 0.25);
+            border-radius: 16px;
+            padding: 15px 20px;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            opacity: 0;
+            animation: optionPopIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            transition: transform 0.18s ease, background-color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .option-btn:nth-child(1) { animation-delay: 0.04s; }
+        .option-btn:nth-child(2) { animation-delay: 0.09s; }
+        .option-btn:nth-child(3) { animation-delay: 0.14s; }
+        .option-btn:nth-child(4) { animation-delay: 0.19s; }
+
+        .option-btn:hover:not(:disabled) {
+            background: #ffffff;
+            color: #000000;
+            border-color: #ffffff;
+            transform: translateX(6px);
+            box-shadow: 0 8px 24px rgba(255, 255, 255, 0.16);
+        }
+
+        .option-letter {
+            width: 30px;
+            height: 30px;
+            border-radius: 999px;
+            border: 1.5px solid currentColor;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .option-btn:disabled {
+            cursor: default;
+        }
+
+        .option-btn.correct {
+            background: #ffffff;
+            color: #000000;
+            border-color: #ffffff;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.35);
+            animation: pulseSuccess 0.35s ease;
+        }
+
+        .option-btn.wrong {
+            background: rgba(255, 75, 75, 0.16);
+            color: #ffb3b3;
+            border-color: rgba(255, 95, 95, 0.7);
+            animation: shakeWrong 0.35s ease;
+        }
+
+        .option-btn.dimmed {
+            opacity: 0.45 !important;
+        }
+
+        .feedback-box {
+            margin-top: 20px;
+            padding: 14px 18px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            font-size: 0.96rem;
+            line-height: 1.55;
+            display: none;
+            animation: textSlideUp 0.28s ease forwards;
+        }
+
+        .feedback-box.show {
+            display: block;
+        }
+
+        .quiz-actions {
+            margin-top: 22px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .quiz-next-btn {
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 12px 26px;
+            border-radius: 999px;
+            font-family: inherit;
+            font-weight: 800;
+            font-size: 0.98rem;
+            cursor: pointer;
+            box-shadow: 0 8px 22px rgba(255, 255, 255, 0.18);
+            transition: transform 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .quiz-next-btn:hover:not(:disabled) {
+            background: #e6e6e6;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(255, 255, 255, 0.26);
+        }
+
+        .quiz-next-btn:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .result-box {
+            text-align: center;
+            padding: 16px 8px;
+            animation: cardReveal 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .result-score {
+            font-size: clamp(2.4rem, 5vw, 3.4rem);
+            font-weight: 800;
+            margin: 12px 0 8px;
+        }
+
+        .result-msg {
+            font-size: 1.08rem;
+            color: #d4d4d4;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .scramble-banner {
+            display: inline-block;
+            font-size: 0.84rem;
+            font-weight: 700;
+            color: #dcdcdc;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 6px 14px;
+            border-radius: 999px;
+            margin-bottom: 18px;
+        }
+
+        /* Files Section */
+        .files-container {
+            width: 100%;
+            max-width: 760px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 24px;
+            padding: 36px;
+            text-align: left;
+            animation: cardReveal 0.5s ease forwards;
+        }
+
+        .files-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .files-title {
+            font-size: 1.9rem;
+            font-weight: 800;
+        }
+
+        .mode-switch {
+            display: flex;
+            gap: 10px;
+        }
+
+        .mode-btn {
+            background-color: #ffffff;
+            color: #000000;
+            text-decoration: none;
+            padding: 9px 18px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.15s ease, background-color 0.15s ease, opacity 0.15s ease;
+        }
+
+        .mode-btn:hover {
+            background-color: #e2e2e2;
+            transform: translateY(-2px);
+        }
+
+        .mode-btn.inactive {
+            background-color: rgba(255, 255, 255, 0.14);
+            color: #ffffff;
+        }
+
+        .mode-btn.inactive:hover {
+            background-color: rgba(255, 255, 255, 0.24);
+        }
+
+        .section-subtext {
+            color: #bdbdbd;
+            font-size: 0.98rem;
+            margin-bottom: 20px;
+        }
+
+        .file-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 14px;
+            padding: 12px 16px;
+            gap: 12px;
+        }
+
+        .file-meta {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .file-name {
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .file-size {
+            font-size: 0.82rem;
+            color: #a8a8a8;
+        }
+
+        .file-link {
+            background-color: #ffffff;
+            color: #000000;
+            text-decoration: none;
+            padding: 7px 14px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+
+        .file-link:hover {
+            background-color: #e2e2e2;
+        }
+
+        .form-box {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-top: 10px;
+        }
+
+        .form-label {
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .text-input, .file-input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            background: rgba(0, 0, 0, 0.55);
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 0.95rem;
+        }
+
+        .text-input:focus {
+            outline: none;
+            border-color: #ffffff;
+        }
+
+        .submit-btn {
+            align-self: flex-start;
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 11px 22px;
+            border-radius: 999px;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: transform 0.15s ease, background-color 0.15s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #e2e2e2;
+            transform: translateY(-2px);
+        }
+
+        .flash-msg {
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-bottom: 18px;
+            font-weight: 600;
+            font-size: 0.92rem;
+        }
+
+        .flash-error {
+            background: rgba(255, 75, 75, 0.18);
+            border: 1px solid rgba(255, 75, 75, 0.45);
+            color: #ff9b9b;
+        }
+
+        .flash-success {
+            background: rgba(75, 255, 145, 0.16);
+            border: 1px solid rgba(75, 255, 145, 0.4);
+            color: #9effc3;
+        }
+
+        .empty-state {
+            color: #9e9e9e;
+            font-style: italic;
+            padding: 14px 0;
+        }
+
+        @media (max-width: 640px) {
+            .wiki-article, .quiz-card {
+                padding: 24px 20px;
+            }
+            .glass-card {
+                padding: 36px 28px;
+            }
+        }
+
+        @keyframes cardReveal {
+            from {
+                opacity: 0;
+                transform: scale(0.96) translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        @keyframes panelSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes textSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+                filter: blur(3px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+        }
+
+        @keyframes optionPopIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes pulseSuccess {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shakeWrong {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
+
+        @keyframes pulseGlow {
+            from {
+                transform: scale(0.9);
+                opacity: 0.7;
+            }
+            to {
+                transform: scale(1.15);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="/introduction" class="nav-btn {% if active_page == 'introduction' %}active{% endif %}">Introduction</a>
+            <a href="/home" class="nav-btn {% if active_page == 'home' %}active{% endif %}">Home</a>
+            <a href="/notes" class="nav-btn {% if active_page == 'notes' %}active{% endif %}">Notes</a>
+            <a href="/files" class="nav-btn {% if active_page == 'files' %}active{% endif %}">Files</a>
+            <a href="/game" class="nav-btn {% if active_page == 'game' %}active{% endif %}">Game</a>
+        </nav>
+    </header>
+
+    <main>
+        {% if active_page == 'introduction' %}
+            <div class="center-stage">
+                <div class="intro-wrapper">
+                    <div class="glass-card">
+                        <h1 class="site-title">Malabanan Science Lab</h1>
+                        <p class="student-info">
+                            Joven Malabanan<br>
+                            Grade 8 Watson
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        {% elif active_page == 'home' %}
+            <div class="home-wrapper">
+                <section class="home-hero">
+                    <h1 class="home-title">Malabanan Science Lab Hub</h1>
+                    <p class="home-subtitle">
+                        Grade 8 Watson &bull; Philippine DepEd Science (SY 2026–2027). Jump straight into your study notes, class files, or interactive First Term quiz.
+                    </p>
+                    <div class="home-stats">
+                        <span class="stat-pill">Active Term: 1st Term</span>
+                        <span class="stat-pill">Quiz Bank: 30 Questions</span>
+                        <span class="stat-pill">Teacher Files: {{ teacher_count | default(0) }}</span>
+                    </div>
+                </section>
+
+                <section class="home-grid">
+                    <a href="/notes" class="home-card">
+                        <div>
+                            <h2 class="home-card-title">Notes</h2>
+                            <p class="home-card-desc">Read Wikipedia-style notes covering Organ Systems, Heredity, Taxonomy, Photosynthesis &amp; Respiration, and Atomic Structure.</p>
+                        </div>
+                        <span class="home-card-cta">Open Notes &rarr;</span>
+                    </a>
+
+                    <a href="/files" class="home-card">
+                        <div>
+                            <h2 class="home-card-title">Files</h2>
+                            <p class="home-card-desc">View uploaded lab files in Teachers View or switch to Student File upload with the student password.</p>
+                        </div>
+                        <span class="home-card-cta">Open Files &rarr;</span>
+                    </a>
+
+                    <a href="/game" class="home-card">
+                        <div>
+                            <h2 class="home-card-title">Game</h2>
+                            <p class="home-card-desc">Test your 1st Term knowledge with 10, 20, or 30 scrambled questions and reshuffled choices after every round.</p>
+                        </div>
+                        <span class="home-card-cta">Start Quiz &rarr;</span>
+                    </a>
+                </section>
+
+                <section class="home-panels">
+                    <div class="home-box">
+                        <h2 class="home-box-title">Term Roadmap</h2>
+                        <ul class="term-roadmap">
+                            <li class="roadmap-item">
+                                <span><strong>1st Term:</strong> Organ Systems, Heredity, Taxonomy, Cycles &amp; Atoms</span>
+                                <span class="roadmap-badge">Ready</span>
+                            </li>
+                            <li class="roadmap-item">
+                                <span><strong>2nd Term:</strong> Upcoming Science Topics</span>
+                                <span class="roadmap-badge upcoming">Soon</span>
+                            </li>
+                            <li class="roadmap-item">
+                                <span><strong>3rd Term:</strong> Upcoming Science Topics</span>
+                                <span class="roadmap-badge upcoming">Soon</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="home-box">
+                        <h2 class="home-box-title">Science Formula &amp; Fact Card</h2>
+                        <div class="fact-display" id="home-fact-card">
+                            <div class="fact-topic" id="home-fact-topic">Photosynthesis</div>
+                            <div class="fact-text" id="home-fact-text">Carbon Dioxide + Water + Light Energy &rarr; Glucose + Oxygen</div>
+                        </div>
+                        <button type="button" class="submit-btn" onclick="cycleScienceFact()">Next Fact / Formula</button>
+                    </div>
+                </section>
+            </div>
+
+        {% elif active_page == 'notes' %}
+            <div class="notes-wrapper">
+                <div class="term-bar" role="tablist" aria-label="Science Terms">
+                    <button type="button" class="term-btn active" onclick="switchTerm('notes', 'term1', this)">1st term</button>
+                    <button type="button" class="term-btn" onclick="switchTerm('notes', 'term2', this)">2nd term</button>
+                    <button type="button" class="term-btn" onclick="switchTerm('notes', 'term3', this)">3rd term</button>
+                </div>
+
+                <article id="notes-term1" class="wiki-article term-panel active">
+                    <div class="wiki-header">
+                        <div class="wiki-kicker">Malabanan Science Lab &bull; Reference Entry</div>
+                        <h1 class="wiki-title">Grade 8 Science – First Term</h1>
+                        <p class="wiki-subtitle">Philippine DepEd Curriculum | School Year 2026–2027</p>
+                    </div>
+
+                    <aside class="wiki-toc">
+                        <div class="wiki-toc-title">Contents</div>
+                        <ol>
+                            <li><a href="#organ-systems">Organ Systems Working Together</a></li>
+                            <li><a href="#heredity">Heredity</a></li>
+                            <li><a href="#taxonomy">Taxonomic Classification</a></li>
+                            <li><a href="#photosynthesis-respiration">Photosynthesis, Cellular Respiration, and Natural Cycles</a></li>
+                            <li><a href="#structure-of-atom">Structure of the Atom</a></li>
+                            <li><a href="#quick-review">Quick Review &amp; Study Tips</a></li>
+                        </ol>
+                    </aside>
+
+                    <section id="organ-systems" class="wiki-section">
+                        <h2 class="wiki-h2">1. Organ Systems Working Together</h2>
+                        <p class="wiki-p">
+                            The human body has different organ systems that work together to maintain life and keep the body healthy.
+                        </p>
+
+                        <h3 class="wiki-h3">Digestive System</h3>
+                        <ul class="wiki-list">
+                            <li>Breaks down food into nutrients.</li>
+                            <li><strong>Mechanical digestion</strong> physically breaks food into smaller pieces.</li>
+                            <li><strong>Chemical digestion</strong> uses enzymes and digestive juices to break down food.</li>
+                            <li><strong>Absorption</strong> allows nutrients to enter the bloodstream.</li>
+                            <li><strong>Elimination</strong> removes undigested waste.</li>
+                        </ul>
+
+                        <h3 class="wiki-h3">Excretory System</h3>
+                        <ul class="wiki-list">
+                            <li>Removes waste products from the body.</li>
+                            <li>The kidneys filter blood and produce urine.</li>
+                            <li>The urinary system includes the kidneys, ureters, urinary bladder, and urethra.</li>
+                        </ul>
+
+                        <h3 class="wiki-h3">Plant Transport System</h3>
+                        <ul class="wiki-list">
+                            <li><strong>Xylem</strong> transports water and minerals from the roots.</li>
+                            <li><strong>Phloem</strong> transports sugars and food throughout the plant.</li>
+                        </ul>
+                    </section>
+
+                    <section id="heredity" class="wiki-section">
+                        <h2 class="wiki-h2">2. Heredity</h2>
+                        <p class="wiki-p">
+                            <strong>Heredity</strong> is the passing of characteristics from parents to their offspring through genes.
+                        </p>
+
+                        <h3 class="wiki-h3">Important Terms</h3>
+                        <ul class="wiki-list">
+                            <li><strong>Genes</strong> – Units of heredity that carry genetic information.</li>
+                            <li><strong>Dominant Allele</strong> – An allele that can be expressed even when only one copy is present.</li>
+                            <li><strong>Recessive Allele</strong> – An allele expressed when two recessive copies are present.</li>
+                            <li><strong>Genotype</strong> – The genetic combination of an organism (AA, Aa, or aa).</li>
+                            <li><strong>Phenotype</strong> – The observable characteristics of an organism.</li>
+                            <li><strong>Punnett Square</strong> – A diagram used to predict possible genetic combinations in offspring.</li>
+                        </ul>
+
+                        <h3 class="wiki-h3">Examples of Genotypes</h3>
+                        <ul class="wiki-list">
+                            <li><strong>AA</strong> – Homozygous dominant</li>
+                            <li><strong>Aa</strong> – Heterozygous</li>
+                            <li><strong>aa</strong> – Homozygous recessive</li>
+                        </ul>
+                    </section>
+
+                    <section id="taxonomy" class="wiki-section">
+                        <h2 class="wiki-h2">3. Taxonomic Classification</h2>
+                        <p class="wiki-p">
+                            <strong>Taxonomic classification</strong> is the scientific process of grouping organisms based on their similarities and differences.
+                        </p>
+
+                        <h3 class="wiki-h3">Six Kingdoms of Life</h3>
+                        <ol class="wiki-olist">
+                            <li><strong>Archaebacteria</strong> – Microorganisms that can survive in extreme environments.</li>
+                            <li><strong>Eubacteria</strong> – Common bacteria found in different environments.</li>
+                            <li><strong>Protista</strong> – Mostly single-celled organisms, such as amoebas.</li>
+                            <li><strong>Fungi</strong> – Organisms such as mushrooms, molds, and yeasts.</li>
+                            <li><strong>Plantae</strong> – Organisms that generally produce their own food through photosynthesis.</li>
+                            <li><strong>Animalia</strong> – Multicellular organisms that obtain food by consuming other organisms.</li>
+                        </ol>
+
+                        <h3 class="wiki-h3">Three Domains of Life</h3>
+                        <ul class="wiki-list">
+                            <li>Bacteria</li>
+                            <li>Archaea</li>
+                            <li>Eukarya</li>
+                        </ul>
+
+                        <h3 class="wiki-h3">Taxonomic Hierarchy</h3>
+                        <ol class="wiki-olist">
+                            <li>Kingdom</li>
+                            <li>Phylum</li>
+                            <li>Class</li>
+                            <li>Order</li>
+                            <li>Family</li>
+                            <li>Genus</li>
+                            <li>Species</li>
+                        </ol>
+                    </section>
+
+                    <section id="photosynthesis-respiration" class="wiki-section">
+                        <h2 class="wiki-h2">4. Photosynthesis, Cellular Respiration, and Natural Cycles</h2>
+
+                        <h3 class="wiki-h3">Photosynthesis</h3>
+                        <p class="wiki-p">
+                            <strong>Photosynthesis</strong> is the process by which plants use sunlight, water, and carbon dioxide to produce glucose and oxygen.
+                        </p>
+
+                        <div class="wiki-box">
+                            <div class="wiki-box-label">Word Equation</div>
+                            <div class="formula-line">Carbon Dioxide + Water + Light Energy &rarr; Glucose + Oxygen</div>
+                        </div>
+
+                        <p class="wiki-p"><strong>Requirements:</strong></p>
+                        <ul class="wiki-list">
+                            <li>Sunlight</li>
+                            <li>Water</li>
+                            <li>Carbon dioxide</li>
+                            <li>Chlorophyll</li>
+                        </ul>
+
+                        <h3 class="wiki-h3">Cellular Respiration</h3>
+                        <p class="wiki-p">
+                            <strong>Cellular respiration</strong> is the process by which cells break down glucose to release usable energy called <strong>ATP</strong>.
+                        </p>
+
+                        <div class="wiki-box">
+                            <div class="wiki-box-label">Word Equation</div>
+                            <div class="formula-line">Glucose + Oxygen &rarr; Carbon Dioxide + Water + Energy (ATP)</div>
+                        </div>
+
+                        <h3 class="wiki-h3">Important Organelles</h3>
+                        <ul class="wiki-list">
+                            <li><strong>Chloroplast</strong> – The organelle where photosynthesis takes place.</li>
+                            <li><strong>Mitochondria</strong> – The organelles where most cellular respiration takes place.</li>
+                        </ul>
+
+                        <h3 class="wiki-h3">Natural Cycles</h3>
+                        <p class="wiki-p"><strong>Water Cycle:</strong> The continuous movement of water through the environment.</p>
+                        <ul class="wiki-list">
+                            <li>Evaporation</li>
+                            <li>Condensation</li>
+                            <li>Precipitation</li>
+                            <li>Collection</li>
+                        </ul>
+
+                        <p class="wiki-p"><strong>Carbon Cycle:</strong> The movement of carbon between living organisms, the atmosphere, oceans, and Earth's surface.</p>
+                        <p class="wiki-p"><strong>Oxygen Cycle:</strong> The movement of oxygen between living organisms and the environment.</p>
+                    </section>
+
+                    <section id="structure-of-atom" class="wiki-section">
+                        <h2 class="wiki-h2">5. Structure of the Atom</h2>
+                        <p class="wiki-p">
+                            An <strong>atom</strong> is the smallest unit of an element that retains its chemical properties.
+                        </p>
+
+                        <h3 class="wiki-h3">Subatomic Particles</h3>
+                        <ol class="wiki-olist">
+                            <li><strong>Proton</strong> – Positively charged particle found in the nucleus.</li>
+                            <li><strong>Neutron</strong> – Neutral particle found in the nucleus.</li>
+                            <li><strong>Electron</strong> – Negatively charged particle found around the nucleus.</li>
+                        </ol>
+
+                        <h3 class="wiki-h3">Development of Atomic Models</h3>
+                        <ol class="wiki-olist">
+                            <li><strong>John Dalton</strong> – Proposed that matter is made of tiny particles called atoms.</li>
+                            <li><strong>J.J. Thomson</strong> – Proposed the Plum Pudding Model.</li>
+                            <li><strong>Ernest Rutherford</strong> – Discovered the small, dense, positively charged nucleus.</li>
+                            <li><strong>Niels Bohr</strong> – Proposed that electrons occupy specific energy levels around the nucleus.</li>
+                        </ol>
+
+                        <h3 class="wiki-h3">Important Atomic Terms</h3>
+                        <ul class="wiki-list">
+                            <li><strong>Atomic Number</strong> – The number of protons in an atom.</li>
+                            <li><strong>Mass Number</strong> – The total number of protons and neutrons.</li>
+                            <li><strong>Electric Charge</strong> – A property of particles that can be positive, negative, or neutral.</li>
+                        </ul>
+
+                        <div class="wiki-box">
+                            <div class="wiki-box-label">Formulas</div>
+                            <div class="formula-line">Atomic Number = Number of Protons</div>
+                            <div class="formula-line">Mass Number = Protons + Neutrons</div>
+                            <div class="formula-line">Number of Neutrons = Mass Number &minus; Atomic Number</div>
+                        </div>
+                    </section>
+
+                    <hr class="wiki-divider">
+
+                    <section id="quick-review" class="wiki-section">
+                        <h2 class="wiki-h2">Quick Review</h2>
+                        <ol class="wiki-olist">
+                            <li><strong>Organ Systems</strong> – How body systems work together.</li>
+                            <li><strong>Heredity</strong> – How traits are passed from parents to offspring.</li>
+                            <li><strong>Taxonomy</strong> – How living organisms are classified.</li>
+                            <li><strong>Photosynthesis</strong> – How plants produce glucose using sunlight.</li>
+                            <li><strong>Cellular Respiration</strong> – How cells release energy from glucose.</li>
+                            <li><strong>Natural Cycles</strong> – How materials move through nature.</li>
+                            <li><strong>Atomic Structure</strong> – The composition and development of atomic models.</li>
+                        </ol>
+
+                        <h3 class="wiki-h3">Study Tips</h3>
+                        <ul class="wiki-list">
+                            <li>Understand the definitions of important scientific terms.</li>
+                            <li>Memorize the functions of the major organ systems.</li>
+                            <li>Practice solving Punnett squares.</li>
+                            <li>Learn the six kingdoms and three domains.</li>
+                            <li>Understand the processes of photosynthesis and cellular respiration.</li>
+                            <li>Memorize the subatomic particles and their charges.</li>
+                            <li>Practice drawing and labeling scientific diagrams.</li>
+                        </ul>
+                    </section>
+                </article>
+
+                <article id="notes-term2" class="wiki-article term-panel">
+                    <div class="wiki-header">
+                        <div class="wiki-kicker">Malabanan Science Lab &bull; Reference Entry</div>
+                        <h1 class="wiki-title">Grade 8 Science – Second Term</h1>
+                        <p class="wiki-subtitle">Philippine DepEd Curriculum | School Year 2026–2027</p>
+                    </div>
+                    <div class="placeholder-box">
+                        <p class="wiki-p"><strong>2nd Term Notes</strong> will appear here once you share your second term guide.</p>
+                    </div>
+                </article>
+
+                <article id="notes-term3" class="wiki-article term-panel">
+                    <div class="wiki-header">
+                        <div class="wiki-kicker">Malabanan Science Lab &bull; Reference Entry</div>
+                        <h1 class="wiki-title">Grade 8 Science – Third Term</h1>
+                        <p class="wiki-subtitle">Philippine DepEd Curriculum | School Year 2026–2027</p>
+                    </div>
+                    <div class="placeholder-box">
+                        <p class="wiki-p"><strong>3rd Term Notes</strong> will appear here once you share your third term guide.</p>
+                    </div>
+                </article>
+            </div>
+
+        {% elif active_page == 'game' %}
+            <div class="game-wrapper">
+                <div class="term-bar" role="tablist" aria-label="Game Terms">
+                    <button type="button" class="term-btn active" onclick="switchTerm('game', 'term1', this)">1st term</button>
+                    <button type="button" class="term-btn" onclick="switchTerm('game', 'term2', this)">2nd term</button>
+                    <button type="button" class="term-btn" onclick="switchTerm('game', 'term3', this)">3rd term</button>
+                </div>
+
+                <div id="game-term1" class="term-panel active">
+                    <div class="count-bar" role="group" aria-label="Number of Questions">
+                        <span class="count-label">Questions:</span>
+                        <button type="button" class="count-btn active" data-count="10" onclick="selectQuestionCount(10, this)">10 Questions</button>
+                        <button type="button" class="count-btn" data-count="20" onclick="selectQuestionCount(20, this)">20 Questions</button>
+                        <button type="button" class="count-btn" data-count="30" onclick="selectQuestionCount(30, this)">30 Questions</button>
+                    </div>
+
+                    <div class="quiz-card">
+                        <div id="quiz-active-view">
+                            <div class="quiz-top-meta">
+                                <span id="quiz-progress-text">Question 1 of 10</span>
+                                <span id="quiz-score-text">Score: 0</span>
+                            </div>
+                            <div class="progress-track">
+                                <div id="quiz-progress-bar" class="progress-fill"></div>
+                            </div>
+
+                            <div id="question-anim-wrap" class="question-box">
+                                <span id="quiz-topic" class="quiz-topic-badge">Organ Systems</span>
+                                <h2 id="quiz-question" class="quiz-question">Loading question...</h2>
+                                <div id="quiz-options" class="options-grid"></div>
+                                <div id="quiz-feedback" class="feedback-box"></div>
+                            </div>
+
+                            <div class="quiz-actions">
+                                <button type="button" id="quiz-next-btn" class="quiz-next-btn" onclick="nextQuestion()" disabled>
+                                    Next Question &rarr;
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="quiz-result-view" class="result-box" style="display: none;">
+                            <span class="quiz-topic-badge">1st Term Quiz Complete</span>
+                            <div id="result-score" class="result-score">0 / 10</div>
+                            <p id="result-msg" class="result-msg"></p>
+                            <div class="scramble-banner">Questions &amp; choices scrambled for your next round!</div>
+                            <br>
+                            <button type="button" class="quiz-next-btn" onclick="restartQuiz()">
+                                Play Again (Scrambled)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="game-term2" class="term-panel">
+                    <div class="quiz-card">
+                        <div class="placeholder-box">
+                            <p class="wiki-p"><strong>2nd Term Quiz</strong> will be ready as soon as you add 2nd Term notes!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="game-term3" class="term-panel">
+                    <div class="quiz-card">
+                        <div class="placeholder-box">
+                            <p class="wiki-p"><strong>3rd Term Quiz</strong> will be ready as soon as you add 3rd Term notes!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {% elif active_page == 'files' %}
+            <div class="center-stage">
+                <div class="files-container">
+                    <div class="files-header">
+                        <h2 class="files-title">Files</h2>
+                        <div class="mode-switch">
+                            <a href="/files?view=teacher" class="mode-btn {% if view_mode != 'student' %}active{% else %}inactive{% endif %}">
+                                Teachers View
+                            </a>
+                            <a href="/files?view=student" class="mode-btn {% if view_mode == 'student' %}active{% else %}inactive{% endif %}">
+                                Student File
+                            </a>
+                        </div>
+                    </div>
+
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <div class="flash-msg {% if category == 'error' %}flash-error{% else %}flash-success{% endif %}">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+
+                    {% if view_mode != 'student' %}
+                        <p class="section-subtext">
+                            Teachers View: Browse and open files uploaded by Joven Malabanan.
+                        </p>
+
+                        {% if teacher_files %}
+                            <ul class="file-list">
+                                {% for file in teacher_files %}
+                                    <li class="file-item">
+                                        <div class="file-meta">
+                                            <span class="file-name">{{ file.name }}</span>
+                                            <span class="file-size">{{ file.size_kb }} KB</span>
+                                        </div>
+                                        <a href="{{ url_for('download_teacher_file', filename=file.name) }}" target="_blank" class="file-link">
+                                            View File
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p class="empty-state">No files have been placed in the teacher_files folder yet.</p>
+                        {% endif %}
+
+                    {% else %}
+                        {% if not student_unlocked %}
+                            <p class="section-subtext">
+                                Student File Upload is protected. Enter the student password to continue.
+                            </p>
+                            <form method="POST" action="/files?view=student" class="form-box">
+                                <input type="hidden" name="action" value="unlock_student">
+                                <label for="password" class="form-label">Student Password</label>
+                                <input type="password" id="password" name="password" class="text-input" placeholder="Enter student password" required>
+                                <button type="submit" class="submit-btn">Unlock Student Upload</button>
+                            </form>
+                        {% else %}
+                            <p class="section-subtext">
+                                Unlocked: Upload assignments or project files below.
+                            </p>
+                            <form method="POST" action="/files?view=student" enctype="multipart/form-data" class="form-box">
+                                <input type="hidden" name="action" value="upload_student">
+                                <input type="hidden" name="password" value="Joven3031">
+                                <label for="student_file" class="form-label">Select File (Assignment, Lab Report, etc.)</label>
+                                <input type="file" id="student_file" name="student_file" class="file-input" required>
+                                <button type="submit" class="submit-btn">Upload File</button>
+                            </form>
+
+                            {% if student_files %}
+                                <h3 style="margin-top: 28px; font-size: 1.15rem;">Submitted Student Files</h3>
+                                <ul class="file-list">
+                                    {% for sfile in student_files %}
+                                        <li class="file-item">
+                                            <div class="file-meta">
+                                                <span class="file-name">{{ sfile.name }}</span>
+                                                <span class="file-size">{{ sfile.size_kb }} KB</span>
+                                            </div>
+                                            <a href="{{ url_for('download_student_file', filename=sfile.name) }}" class="file-link">
+                                                Download
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    </main>
+
+    <script>
+        function switchTerm(sectionPrefix, termId, clickedBtn) {
+            const parentWrapper = clickedBtn.closest('.notes-wrapper, .game-wrapper');
+            if (!parentWrapper) return;
+
+            parentWrapper.querySelectorAll('.term-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            parentWrapper.querySelectorAll('.term-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            const targetPanel = document.getElementById(`${sectionPrefix}-${termId}`);
+            if (targetPanel) {
+                targetPanel.classList.add('active');
+            }
+            clickedBtn.classList.add('active');
+        }
+
+        const scienceFacts = [
+            {
+                topic: "Photosynthesis",
+                text: "Carbon Dioxide + Water + Light Energy → Glucose + Oxygen (takes place in chloroplasts)."
+            },
+            {
+                topic: "Cellular Respiration",
+                text: "Glucose + Oxygen → Carbon Dioxide + Water + Energy (ATP) (mostly in mitochondria)."
+            },
+            {
+                topic: "Atomic Structure Formula",
+                text: "Mass Number = Protons + Neutrons | Neutrons = Mass Number − Atomic Number."
+            },
+            {
+                topic: "Plant Transport System",
+                text: "Xylem transports water and minerals from roots; Phloem transports sugars throughout the plant."
+            },
+            {
+                topic: "Heredity Genotypes",
+                text: "AA = Homozygous dominant | Aa = Heterozygous | aa = Homozygous recessive."
+            }
+        ];
+
+        let currentFactIndex = 0;
+
+        function cycleScienceFact() {
+            currentFactIndex = (currentFactIndex + 1) % scienceFacts.length;
+            const fact = scienceFacts[currentFactIndex];
+            const card = document.getElementById("home-fact-card");
+            document.getElementById("home-fact-topic").textContent = fact.topic;
+            document.getElementById("home-fact-text").textContent = fact.text;
+            if (card) {
+                card.style.animation = "none";
+                void card.offsetWidth;
+                card.style.animation = "textSlideUp 0.3s ease forwards";
+            }
+        }
+
+        const firstTermQuestionBank = [
+            {
+                topic: "Organ Systems",
+                question: "Which part of a plant transports water and minerals from the roots?",
+                options: ["Xylem", "Phloem", "Chloroplast", "Mitochondria"],
+                answer: "Xylem",
+                explanation: "Xylem transports water and minerals from the roots, while phloem transports sugars and food."
+            },
+            {
+                topic: "Organ Systems",
+                question: "Which process uses enzymes and digestive juices to break down food?",
+                options: ["Chemical digestion", "Mechanical digestion", "Elimination", "Absorption"],
+                answer: "Chemical digestion",
+                explanation: "Chemical digestion uses enzymes and digestive juices to break down food into nutrients."
+            },
+            {
+                topic: "Organ Systems",
+                question: "Which process physically breaks food into smaller pieces?",
+                options: ["Mechanical digestion", "Chemical digestion", "Elimination", "Condensation"],
+                answer: "Mechanical digestion",
+                explanation: "Mechanical digestion physically breaks food into smaller pieces."
+            },
+            {
+                topic: "Organ Systems",
+                question: "Which part of digestion allows nutrients to enter the bloodstream?",
+                options: ["Absorption", "Elimination", "Mechanical digestion", "Precipitation"],
+                answer: "Absorption",
+                explanation: "Absorption allows digested nutrients to enter the bloodstream."
+            },
+            {
+                topic: "Organ Systems",
+                question: "Which organs filter blood and produce urine in the excretory system?",
+                options: ["Kidneys", "Ureters", "Urinary bladder", "Urethra"],
+                answer: "Kidneys",
+                explanation: "The kidneys filter blood to remove waste products and produce urine."
+            },
+            {
+                topic: "Organ Systems",
+                question: "Which plant tissue transports sugars and food throughout the plant?",
+                options: ["Phloem", "Xylem", "Root hair", "Stomata"],
+                answer: "Phloem",
+                explanation: "Phloem transports sugars and food throughout the plant."
+            },
+            {
+                topic: "Heredity",
+                question: "What do you call a genotype written as 'Aa'?",
+                options: ["Heterozygous", "Homozygous dominant", "Homozygous recessive", "Phenotype"],
+                answer: "Heterozygous",
+                explanation: "Aa is heterozygous because it has one dominant allele (A) and one recessive allele (a)."
+            },
+            {
+                topic: "Heredity",
+                question: "Which term refers to the observable characteristics of an organism?",
+                options: ["Phenotype", "Genotype", "Gene", "Punnett Square"],
+                answer: "Phenotype",
+                explanation: "Phenotype is the observable characteristic of an organism."
+            },
+            {
+                topic: "Heredity",
+                question: "Which allele can be expressed even when only one copy is present?",
+                options: ["Dominant allele", "Recessive allele", "Homozygous allele", "Neutral allele"],
+                answer: "Dominant allele",
+                explanation: "A dominant allele can be expressed even when only one copy is present."
+            },
+            {
+                topic: "Heredity",
+                question: "When is a recessive allele expressed in an organism?",
+                options: [
+                    "When two recessive copies are present",
+                    "Whenever one dominant copy is present",
+                    "Only during cellular respiration",
+                    "Only in single-celled organisms"
+                ],
+                answer: "When two recessive copies are present",
+                explanation: "A recessive allele is expressed when two recessive copies (aa) are present."
+            },
+            {
+                topic: "Heredity",
+                question: "Which genotype represents homozygous recessive?",
+                options: ["aa", "AA", "Aa", "AB"],
+                answer: "aa",
+                explanation: "aa represents homozygous recessive, while AA is homozygous dominant."
+            },
+            {
+                topic: "Heredity",
+                question: "What tool is used to predict possible genetic combinations in offspring?",
+                options: ["Punnett Square", "Periodic Table", "Food Web", "Atomic Model"],
+                answer: "Punnett Square",
+                explanation: "A Punnett Square is a diagram used to predict possible genetic combinations in offspring."
+            },
+            {
+                topic: "Taxonomic Classification",
+                question: "Which kingdom includes multicellular organisms that obtain food by consuming other organisms?",
+                options: ["Animalia", "Plantae", "Protista", "Archaebacteria"],
+                answer: "Animalia",
+                explanation: "Animalia consists of multicellular organisms that obtain food by consuming other organisms."
+            },
+            {
+                topic: "Taxonomic Classification",
+                question: "Which kingdom includes organisms that generally produce their own food through photosynthesis?",
+                options: ["Plantae", "Fungi", "Eubacteria", "Animalia"],
+                answer: "Plantae",
+                explanation: "Plantae includes organisms that generally produce their own food through photosynthesis."
+            },
+            {
+                topic: "Taxonomic Classification",
+                question: "Which kingdom includes mushrooms, molds, and yeasts?",
+                options: ["Fungi", "Protista", "Archaebacteria", "Plantae"],
+                answer: "Fungi",
+                explanation: "Fungi includes organisms such as mushrooms, molds, and yeasts."
+            },
+            {
+                topic: "Taxonomic Classification",
+                question: "Which kingdom is made up of microorganisms that can survive in extreme environments?",
+                options: ["Archaebacteria", "Protista", "Fungi", "Animalia"],
+                answer: "Archaebacteria",
+                explanation: "Archaebacteria are microorganisms that can survive in extreme environments."
+            },
+            {
+                topic: "Taxonomic Classification",
+                question: "Which group includes mostly single-celled organisms such as amoebas?",
+                options: ["Protista", "Eubacteria", "Plantae", "Fungi"],
+                answer: "Protista",
+                explanation: "Protista includes mostly single-celled organisms, such as amoebas."
+            },
+            {
+                topic: "Taxonomic Classification",
+                question: "What are the Three Domains of Life?",
+                options: [
+                    "Bacteria, Archaea, and Eukarya",
+                    "Plantae, Fungi, and Animalia",
+                    "Kingdom, Phylum, and Class",
+                    "Genus, Species, and Family"
+                ],
+                answer: "Bacteria, Archaea, and Eukarya",
+                explanation: "The Three Domains of Life are Bacteria, Archaea, and Eukarya."
+            },
+            {
+                topic: "Taxonomic Classification",
+                question: "What is the correct order of the last three levels in the taxonomic hierarchy?",
+                options: [
+                    "Family → Genus → Species",
+                    "Order → Species → Genus",
+                    "Class → Species → Family",
+                    "Genus → Family → Species"
+                ],
+                answer: "Family → Genus → Species",
+                explanation: "The taxonomic hierarchy runs from Kingdom down to Phylum, Class, Order, Family, Genus, and Species."
+            },
+            {
+                topic: "Photosynthesis & Respiration",
+                question: "Which organelle is where most cellular respiration takes place?",
+                options: ["Mitochondria", "Chloroplast", "Ribosome", "Cell Wall"],
+                answer: "Mitochondria",
+                explanation: "Mitochondria are the organelles where most cellular respiration takes place to release ATP."
+            },
+            {
+                topic: "Photosynthesis & Respiration",
+                question: "Which organelle is where photosynthesis takes place?",
+                options: ["Chloroplast", "Mitochondria", "Nucleus", "Lysosome"],
+                answer: "Chloroplast",
+                explanation: "Chloroplast is the organelle where photosynthesis takes place."
+            },
+            {
+                topic: "Photosynthesis & Respiration",
+                question: "What are the products of photosynthesis?",
+                options: [
+                    "Glucose and oxygen",
+                    "Carbon dioxide and water",
+                    "Glucose and carbon dioxide",
+                    "Water and nitrogen"
+                ],
+                answer: "Glucose and oxygen",
+                explanation: "Carbon Dioxide + Water + Light Energy → Glucose + Oxygen."
+            },
+            {
+                topic: "Photosynthesis & Respiration",
+                question: "What usable energy molecule is released during cellular respiration?",
+                options: ["ATP", "DNA", "RNA", "Glucose"],
+                answer: "ATP",
+                explanation: "Cellular respiration breaks down glucose to release usable energy called ATP."
+            },
+            {
+                topic: "Photosynthesis & Respiration",
+                question: "Which four stages make up the Water Cycle in your notes?",
+                options: [
+                    "Evaporation, Condensation, Precipitation, Collection",
+                    "Evaporation, Filtration, Absorption, Elimination",
+                    "Condensation, Respiration, Digestion, Collection",
+                    "Precipitation, Photosynthesis, Collection, Decay"
+                ],
+                answer: "Evaporation, Condensation, Precipitation, Collection",
+                explanation: "The Water Cycle stages listed are Evaporation, Condensation, Precipitation, and Collection."
+            },
+            {
+                topic: "Photosynthesis & Respiration",
+                question: "Which cycle involves the movement of carbon between living organisms, atmosphere, oceans, and Earth's surface?",
+                options: ["Carbon Cycle", "Water Cycle", "Rock Cycle", "Nitrogen Cycle"],
+                answer: "Carbon Cycle",
+                explanation: "The Carbon Cycle is the movement of carbon between living organisms, the atmosphere, oceans, and Earth's surface."
+            },
+            {
+                topic: "Structure of the Atom",
+                question: "Which subatomic particle is found in the nucleus and has no electric charge?",
+                options: ["Neutron", "Proton", "Electron", "Positron"],
+                answer: "Neutron",
+                explanation: "A neutron is a neutral particle (no charge) found in the nucleus."
+            },
+            {
+                topic: "Structure of the Atom",
+                question: "Which subatomic particle is positively charged and located in the nucleus?",
+                options: ["Proton", "Electron", "Neutron", "Quark"],
+                answer: "Proton",
+                explanation: "A proton is a positively charged particle found in the nucleus."
+            },
+            {
+                topic: "Structure of the Atom",
+                question: "Who proposed that electrons occupy specific energy levels around the nucleus?",
+                options: ["Niels Bohr", "John Dalton", "J.J. Thomson", "Ernest Rutherford"],
+                answer: "Niels Bohr",
+                explanation: "Niels Bohr proposed that electrons occupy specific energy levels around the nucleus."
+            },
+            {
+                topic: "Structure of the Atom",
+                question: "Who discovered the small, dense, positively charged nucleus?",
+                options: ["Ernest Rutherford", "John Dalton", "J.J. Thomson", "Niels Bohr"],
+                answer: "Ernest Rutherford",
+                explanation: "Ernest Rutherford discovered the small, dense, positively charged nucleus."
+            },
+            {
+                topic: "Structure of the Atom",
+                question: "How is Mass Number calculated from protons and neutrons?",
+                options: [
+                    "Mass Number = Protons + Neutrons",
+                    "Mass Number = Protons − Neutrons",
+                    "Mass Number = Number of Protons only",
+                    "Mass Number = Neutrons − Protons"
+                ],
+                answer: "Mass Number = Protons + Neutrons",
+                explanation: "Mass Number is the total number of protons and neutrons (Protons + Neutrons)."
+            }
+        ];
+
+        function shuffleArray(arr) {
+            const copy = [...arr];
+            for (let i = copy.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [copy[i], copy[j]] = [copy[j], copy[i]];
+            }
+            return copy;
+        }
+
+        let selectedQuestionCount = 10;
+        let activeQuestions = [];
+        let currentQIndex = 0;
+        let score = 0;
+        let answered = false;
+
+        function buildScrambledRound(count) {
+            const pickedQuestions = shuffleArray(firstTermQuestionBank).slice(0, count);
+            return pickedQuestions.map(q => {
+                const scrambledOptions = shuffleArray(q.options);
+                return {
+                    topic: q.topic,
+                    question: q.question,
+                    options: scrambledOptions,
+                    correctAnswer: q.answer,
+                    explanation: q.explanation
+                };
+            });
+        }
+
+        function startNewGameRound(count = selectedQuestionCount) {
+            selectedQuestionCount = count;
+            activeQuestions = buildScrambledRound(count);
+            currentQIndex = 0;
+            score = 0;
+            answered = false;
+
+            document.getElementById("quiz-result-view").style.display = "none";
+            document.getElementById("quiz-active-view").style.display = "block";
+            renderQuestion();
+        }
+
+        function selectQuestionCount(count, clickedBtn) {
+            document.querySelectorAll(".count-btn").forEach(btn => btn.classList.remove("active"));
+            if (clickedBtn) {
+                clickedBtn.classList.add("active");
+            }
+            startNewGameRound(count);
+        }
+
+        function renderQuestion() {
+            const qData = activeQuestions[currentQIndex];
+            const total = activeQuestions.length;
+
+            document.getElementById("quiz-progress-text").textContent = `Question ${currentQIndex + 1} of ${total}`;
+            document.getElementById("quiz-score-text").textContent = `Score: ${score}`;
+            document.getElementById("quiz-progress-bar").style.width = `${((currentQIndex + 1) / total) * 100}%`;
+
+            const animWrap = document.getElementById("question-anim-wrap");
+            animWrap.style.animation = "none";
+            void animWrap.offsetWidth;
+            animWrap.style.animation = "textSlideUp 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards";
+
+            document.getElementById("quiz-topic").textContent = qData.topic;
+            document.getElementById("quiz-question").textContent = qData.question;
+
+            const feedbackBox = document.getElementById("quiz-feedback");
+            feedbackBox.className = "feedback-box";
+            feedbackBox.textContent = "";
+
+            const nextBtn = document.getElementById("quiz-next-btn");
+            nextBtn.disabled = true;
+            nextBtn.textContent = currentQIndex === total - 1 ? "See Results" : "Next Question →";
+            answered = false;
+
+            const optionsContainer = document.getElementById("quiz-options");
+            optionsContainer.innerHTML = "";
+            const letters = ["A", "B", "C", "D"];
+
+            qData.options.forEach((optText, idx) => {
+                const btn = document.createElement("button");
+                btn.type = "button";
+                btn.className = "option-btn";
+                btn.innerHTML = `<span class="option-letter">${letters[idx]}</span><span>${optText}</span>`;
+                btn.onclick = () => selectAnswer(optText, btn);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function selectAnswer(chosenText, clickedBtn) {
+            if (answered) return;
+            answered = true;
+
+            const qData = activeQuestions[currentQIndex];
+            const allOptionBtns = document.querySelectorAll("#quiz-options .option-btn");
+            const feedbackBox = document.getElementById("quiz-feedback");
+
+            allOptionBtns.forEach(btn => {
+                btn.disabled = true;
+                const btnText = btn.querySelector("span:last-child").textContent;
+                if (btnText === qData.correctAnswer) {
+                    btn.classList.add("correct");
+                } else if (btn === clickedBtn) {
+                    btn.classList.add("wrong");
+                } else {
+                    btn.classList.add("dimmed");
+                }
+            });
+
+            if (chosenText === qData.correctAnswer) {
+                score++;
+                document.getElementById("quiz-score-text").textContent = `Score: ${score}`;
+                feedbackBox.innerHTML = `<strong>Correct!</strong> ${qData.explanation}`;
+            } else {
+                feedbackBox.innerHTML = `<strong>Not quite.</strong> ${qData.explanation}`;
+            }
+
+            feedbackBox.classList.add("show");
+            document.getElementById("quiz-next-btn").disabled = false;
+        }
+
+        function nextQuestion() {
+            if (!answered) return;
+            if (currentQIndex < activeQuestions.length - 1) {
+                currentQIndex++;
+                renderQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.getElementById("quiz-active-view").style.display = "none";
+            const resultView = document.getElementById("quiz-result-view");
+            resultView.style.display = "block";
+
+            const total = activeQuestions.length;
+            const ratio = score / total;
+            document.getElementById("result-score").textContent = `${score} / ${total}`;
+
+            let msg = "Good effort! Review your 1st Term notes and try the scrambled round again.";
+            if (ratio === 1) {
+                msg = "Perfect score! You mastered Grade 8 Science First Term.";
+            } else if (ratio >= 0.7) {
+                msg = "Great job! You know your First Term concepts well.";
+            }
+            document.getElementById("result-msg").textContent = msg;
+        }
+
+        function restartQuiz() {
+            startNewGameRound(selectedQuestionCount);
+        }
+
+        if (document.getElementById("quiz-question")) {
+            startNewGameRound(10);
+        }
+    </script>
+
+</body>
+</html>
