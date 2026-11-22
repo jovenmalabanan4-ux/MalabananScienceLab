@@ -324,7 +324,7 @@
             gap: 12px;
             flex-wrap: wrap;
             margin-top: 4px;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         .term-btn {
@@ -351,47 +351,118 @@
             box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
         }
 
-        /* Question Count Selector Bar (10 / 20 / 30 Questions) */
-        .count-bar {
+        /* Live Search Bar in Notes */
+        .notes-search-bar {
+            width: 100%;
+            max-width: 540px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+
+        .notes-search-input {
+            flex: 1;
+            padding: 11px 18px;
+            border-radius: 999px;
+            border: 1.5px solid rgba(255, 255, 255, 0.28);
+            background: rgba(255, 255, 255, 0.06);
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: border-color 0.2s ease, background-color 0.2s ease;
+        }
+
+        .notes-search-input:focus {
+            outline: none;
+            border-color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .notes-search-clear {
+            background: rgba(255, 255, 255, 0.14);
+            color: #ffffff;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 999px;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 0.86rem;
+            cursor: pointer;
+            display: none;
+        }
+
+        .notes-search-clear.visible {
+            display: inline-block;
+        }
+
+        .search-empty-notice {
+            display: none;
+            text-align: center;
+            padding: 28px 16px;
+            color: #cccccc;
+            font-weight: 700;
+        }
+
+        /* Quiz Controls: Count & Topic Filter */
+        .quiz-controls-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 22px;
+            width: 100%;
+        }
+
+        .count-bar, .topic-filter-bar {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
-            margin-bottom: 24px;
         }
 
         .count-label {
-            font-size: 0.86rem;
+            font-size: 0.85rem;
             font-weight: 700;
             color: #bdbdbd;
             margin-right: 4px;
         }
 
-        .count-btn {
+        .count-btn, .topic-pill-btn {
             background: rgba(255, 255, 255, 0.06);
             color: #ffffff;
-            border: 1.5px solid rgba(255, 255, 255, 0.35);
-            padding: 8px 18px;
+            border: 1.5px solid rgba(255, 255, 255, 0.3);
+            padding: 7px 15px;
             border-radius: 999px;
             font-family: inherit;
             font-weight: 700;
-            font-size: 0.88rem;
+            font-size: 0.84rem;
             cursor: pointer;
             transition: all 0.18s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        .count-btn:hover {
+        .count-btn:hover, .topic-pill-btn:hover {
             border-color: #ffffff;
             background: rgba(255, 255, 255, 0.16);
             transform: translateY(-2px);
         }
 
-        .count-btn.active {
+        .count-btn.active, .topic-pill-btn.active {
             background: #ffffff;
             color: #000000;
             border-color: #ffffff;
             box-shadow: 0 6px 18px rgba(255, 255, 255, 0.22);
+        }
+
+        .best-score-badge {
+            font-size: 0.84rem;
+            font-weight: 800;
+            color: #e6e6e6;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 5px 14px;
+            border-radius: 999px;
         }
 
         .term-panel {
@@ -449,7 +520,7 @@
             border-radius: 10px;
             padding: 16px 22px;
             margin-bottom: 30px;
-            max-width: 440px;
+            max-width: 460px;
         }
 
         .wiki-toc-title {
@@ -546,6 +617,91 @@
             color: #ffffff;
             margin: 4px 0;
             font-size: 1rem;
+        }
+
+        /* Interactive Punnett Square Widget */
+        .punnett-widget {
+            background: #131313;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 14px;
+            padding: 20px;
+            margin: 18px 0;
+        }
+
+        .punnett-controls {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .punnett-select-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            font-size: 0.88rem;
+            font-weight: 700;
+        }
+
+        .punnett-select {
+            background: #000000;
+            color: #ffffff;
+            border: 1.5px solid rgba(255, 255, 255, 0.35);
+            border-radius: 10px;
+            padding: 8px 12px;
+            font-family: inherit;
+            font-weight: 700;
+        }
+
+        .punnett-layout {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .punnett-table {
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        .punnett-table th, .punnett-table td {
+            width: 58px;
+            height: 50px;
+            border: 1.5px solid rgba(255, 255, 255, 0.3);
+            font-weight: 800;
+            font-size: 1.05rem;
+        }
+
+        .punnett-table th {
+            background: rgba(255, 255, 255, 0.14);
+        }
+
+        .punnett-table td {
+            background: #0a0a0a;
+        }
+
+        .punnett-summary {
+            font-size: 0.95rem;
+            line-height: 1.65;
+            color: #e4e4e4;
+        }
+
+        /* Inline SVG Diagram Box */
+        .diagram-card {
+            background: #111111;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 14px;
+            padding: 18px;
+            margin: 16px 0;
+            text-align: center;
+        }
+
+        .diagram-caption {
+            font-size: 0.84rem;
+            color: #bdbdbd;
+            font-weight: 700;
+            margin-top: 8px;
         }
 
         .wiki-divider {
@@ -770,7 +926,7 @@
         .result-msg {
             font-size: 1.08rem;
             color: #d4d4d4;
-            margin-bottom: 24px;
+            margin-bottom: 18px;
             line-height: 1.6;
         }
 
@@ -784,6 +940,23 @@
             padding: 6px 14px;
             border-radius: 999px;
             margin-bottom: 18px;
+        }
+
+        .missed-review-box {
+            text-align: left;
+            margin-top: 22px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .missed-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 3px solid #ff8a8a;
+            border-radius: 0 12px 12px 0;
+            padding: 12px 14px;
+            margin-bottom: 10px;
+            font-size: 0.92rem;
+            line-height: 1.5;
         }
 
         /* Files Section */
@@ -849,7 +1022,19 @@
         .section-subtext {
             color: #bdbdbd;
             font-size: 0.98rem;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
+            line-height: 1.55;
+        }
+
+        .storage-notice {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 12px 16px;
+            font-size: 0.88rem;
+            color: #dcdcdc;
+            margin-bottom: 18px;
+            line-height: 1.5;
         }
 
         .file-list {
@@ -948,6 +1133,18 @@
             transform: translateY(-2px);
         }
 
+        .secondary-btn {
+            background-color: rgba(255, 255, 255, 0.14);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.24);
+            padding: 9px 18px;
+            border-radius: 999px;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 0.88rem;
+            cursor: pointer;
+        }
+
         .flash-msg {
             padding: 12px 16px;
             border-radius: 12px;
@@ -984,49 +1181,23 @@
         }
 
         @keyframes cardReveal {
-            from {
-                opacity: 0;
-                transform: scale(0.96) translateY(12px);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
+            from { opacity: 0; transform: scale(0.96) translateY(12px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
         }
 
         @keyframes panelSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes textSlideUp {
-            from {
-                opacity: 0;
-                transform: translateY(14px);
-                filter: blur(3px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-                filter: blur(0);
-            }
+            from { opacity: 0; transform: translateY(14px); filter: blur(3px); }
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
         }
 
         @keyframes optionPopIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px) scale(0.98);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+            from { opacity: 0; transform: translateY(10px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         @keyframes pulseSuccess {
@@ -1042,14 +1213,8 @@
         }
 
         @keyframes pulseGlow {
-            from {
-                transform: scale(0.9);
-                opacity: 0.7;
-            }
-            to {
-                transform: scale(1.15);
-                opacity: 1;
-            }
+            from { transform: scale(0.9); opacity: 0.7; }
+            to { transform: scale(1.15); opacity: 1; }
         }
     </style>
 </head>
@@ -1097,7 +1262,7 @@
                     <a href="/notes" class="home-card">
                         <div>
                             <h2 class="home-card-title">Notes</h2>
-                            <p class="home-card-desc">Read Wikipedia-style notes covering Organ Systems, Heredity, Taxonomy, Photosynthesis &amp; Respiration, and Atomic Structure.</p>
+                            <p class="home-card-desc">Read Wikipedia-style notes with an interactive Punnett Square calculator, diagrams, and live keyword search.</p>
                         </div>
                         <span class="home-card-cta">Open Notes &rarr;</span>
                     </a>
@@ -1113,7 +1278,7 @@
                     <a href="/game" class="home-card">
                         <div>
                             <h2 class="home-card-title">Game</h2>
-                            <p class="home-card-desc">Test your 1st Term knowledge with 10, 20, or 30 scrambled questions and reshuffled choices after every round.</p>
+                            <p class="home-card-desc">Test your 1st Term knowledge by topic or full quiz (10/20/30 questions) with personal best tracking.</p>
                         </div>
                         <span class="home-card-cta">Start Quiz &rarr;</span>
                     </a>
@@ -1157,6 +1322,11 @@
                     <button type="button" class="term-btn" onclick="switchTerm('notes', 'term3', this)">3rd term</button>
                 </div>
 
+                <div class="notes-search-bar">
+                    <input type="text" id="notes-search-input" class="notes-search-input" placeholder="Search notes (e.g., Xylem, Punnett, Proton, ATP)..." oninput="filterNotesSections()">
+                    <button type="button" id="notes-search-clear" class="notes-search-clear" onclick="clearNotesSearch()">Clear</button>
+                </div>
+
                 <article id="notes-term1" class="wiki-article term-panel active">
                     <div class="wiki-header">
                         <div class="wiki-kicker">Malabanan Science Lab &bull; Reference Entry</div>
@@ -1164,11 +1334,11 @@
                         <p class="wiki-subtitle">Philippine DepEd Curriculum | School Year 2026–2027</p>
                     </div>
 
-                    <aside class="wiki-toc">
+                    <aside class="wiki-toc" id="notes-toc">
                         <div class="wiki-toc-title">Contents</div>
                         <ol>
                             <li><a href="#organ-systems">Organ Systems Working Together</a></li>
-                            <li><a href="#heredity">Heredity</a></li>
+                            <li><a href="#heredity">Heredity &amp; Interactive Punnett Square</a></li>
                             <li><a href="#taxonomy">Taxonomic Classification</a></li>
                             <li><a href="#photosynthesis-respiration">Photosynthesis, Cellular Respiration, and Natural Cycles</a></li>
                             <li><a href="#structure-of-atom">Structure of the Atom</a></li>
@@ -1176,7 +1346,11 @@
                         </ol>
                     </aside>
 
-                    <section id="organ-systems" class="wiki-section">
+                    <div id="notes-search-empty" class="search-empty-notice">
+                        No sections matched your search. Try another keyword!
+                    </div>
+
+                    <section id="organ-systems" class="wiki-section searchable-section">
                         <h2 class="wiki-h2">1. Organ Systems Working Together</h2>
                         <p class="wiki-p">
                             The human body has different organ systems that work together to maintain life and keep the body healthy.
@@ -1205,7 +1379,7 @@
                         </ul>
                     </section>
 
-                    <section id="heredity" class="wiki-section">
+                    <section id="heredity" class="wiki-section searchable-section">
                         <h2 class="wiki-h2">2. Heredity</h2>
                         <p class="wiki-p">
                             <strong>Heredity</strong> is the passing of characteristics from parents to their offspring through genes.
@@ -1227,9 +1401,55 @@
                             <li><strong>Aa</strong> – Heterozygous</li>
                             <li><strong>aa</strong> – Homozygous recessive</li>
                         </ul>
+
+                        <div class="punnett-widget">
+                            <div class="wiki-box-label">Interactive Punnett Square Lab</div>
+                            <div class="punnett-controls">
+                                <div class="punnett-select-group">
+                                    <label for="parent1-select">Parent 1 Genotype</label>
+                                    <select id="parent1-select" class="punnett-select" onchange="updatePunnettSquare()">
+                                        <option value="AA">AA (Homozygous Dominant)</option>
+                                        <option value="Aa" selected>Aa (Heterozygous)</option>
+                                        <option value="aa">aa (Homozygous Recessive)</option>
+                                    </select>
+                                </div>
+                                <div class="punnett-select-group">
+                                    <label for="parent2-select">Parent 2 Genotype</label>
+                                    <select id="parent2-select" class="punnett-select" onchange="updatePunnettSquare()">
+                                        <option value="AA">AA (Homozygous Dominant)</option>
+                                        <option value="Aa" selected>Aa (Heterozygous)</option>
+                                        <option value="aa">aa (Homozygous Recessive)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="punnett-layout">
+                                <table class="punnett-table" aria-label="Punnett Square Grid">
+                                    <thead>
+                                        <tr>
+                                            <th>&times;</th>
+                                            <th id="p1-a1">A</th>
+                                            <th id="p1-a2">a</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th id="p2-a1">A</th>
+                                            <td id="cell-11">AA</td>
+                                            <td id="cell-12">Aa</td>
+                                        </tr>
+                                        <tr>
+                                            <th id="p2-a2">a</th>
+                                            <td id="cell-21">Aa</td>
+                                            <td id="cell-22">aa</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div id="punnett-summary" class="punnett-summary"></div>
+                            </div>
+                        </div>
                     </section>
 
-                    <section id="taxonomy" class="wiki-section">
+                    <section id="taxonomy" class="wiki-section searchable-section">
                         <h2 class="wiki-h2">3. Taxonomic Classification</h2>
                         <p class="wiki-p">
                             <strong>Taxonomic classification</strong> is the scientific process of grouping organisms based on their similarities and differences.
@@ -1264,7 +1484,7 @@
                         </ol>
                     </section>
 
-                    <section id="photosynthesis-respiration" class="wiki-section">
+                    <section id="photosynthesis-respiration" class="wiki-section searchable-section">
                         <h2 class="wiki-h2">4. Photosynthesis, Cellular Respiration, and Natural Cycles</h2>
 
                         <h3 class="wiki-h3">Photosynthesis</h3>
@@ -1310,15 +1530,54 @@
                             <li>Collection</li>
                         </ul>
 
+                        <div class="diagram-card">
+                            <svg width="100%" height="120" viewBox="0 0 540 120" aria-label="Water Cycle Diagram">
+                                <rect x="10" y="34" width="110" height="44" rx="22" fill="none" stroke="#ffffff" stroke-width="1.8"/>
+                                <text x="65" y="61" fill="#ffffff" font-size="13" font-weight="700" text-anchor="middle">Evaporation</text>
+                                <line x1="124" y1="56" x2="144" y2="56" stroke="#ffffff" stroke-width="2"/>
+                                <polygon points="144,51 154,56 144,61" fill="#ffffff"/>
+
+                                <rect x="158" y="34" width="116" height="44" rx="22" fill="none" stroke="#ffffff" stroke-width="1.8"/>
+                                <text x="216" y="61" fill="#ffffff" font-size="13" font-weight="700" text-anchor="middle">Condensation</text>
+                                <line x1="278" y1="56" x2="298" y2="56" stroke="#ffffff" stroke-width="2"/>
+                                <polygon points="298,51 308,56 298,61" fill="#ffffff"/>
+
+                                <rect x="312" y="34" width="112" height="44" rx="22" fill="none" stroke="#ffffff" stroke-width="1.8"/>
+                                <text x="368" y="61" fill="#ffffff" font-size="13" font-weight="700" text-anchor="middle">Precipitation</text>
+                                <line x1="428" y1="56" x2="444" y2="56" stroke="#ffffff" stroke-width="2"/>
+                                <polygon points="444,51 454,56 444,61" fill="#ffffff"/>
+
+                                <rect x="458" y="34" width="76" height="44" rx="22" fill="#ffffff"/>
+                                <text x="496" y="61" fill="#000000" font-size="12" font-weight="800" text-anchor="middle">Collection</text>
+                            </svg>
+                            <div class="diagram-caption">Figure 1: Four Continuous Stages of the Water Cycle</div>
+                        </div>
+
                         <p class="wiki-p"><strong>Carbon Cycle:</strong> The movement of carbon between living organisms, the atmosphere, oceans, and Earth's surface.</p>
                         <p class="wiki-p"><strong>Oxygen Cycle:</strong> The movement of oxygen between living organisms and the environment.</p>
                     </section>
 
-                    <section id="structure-of-atom" class="wiki-section">
+                    <section id="structure-of-atom" class="wiki-section searchable-section">
                         <h2 class="wiki-h2">5. Structure of the Atom</h2>
                         <p class="wiki-p">
                             An <strong>atom</strong> is the smallest unit of an element that retains its chemical properties.
                         </p>
+
+                        <div class="diagram-card">
+                            <svg width="240" height="190" viewBox="0 0 240 190" aria-label="Bohr Atomic Model Diagram">
+                                <circle cx="120" cy="95" r="76" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" stroke-dasharray="4 4"/>
+                                <circle cx="120" cy="95" r="46" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="1.5"/>
+                                <circle cx="114" cy="90" r="9" fill="#ffffff"/>
+                                <text x="114" y="94" fill="#000000" font-size="11" font-weight="800" text-anchor="middle">+</text>
+                                <circle cx="127" cy="99" r="9" fill="rgba(255,255,255,0.4)" stroke="#ffffff" stroke-width="1.5"/>
+                                <text x="127" y="103" fill="#ffffff" font-size="10" font-weight="800" text-anchor="middle">0</text>
+                                <circle cx="166" cy="95" r="6" fill="#ffffff"/>
+                                <text x="166" y="98" fill="#000000" font-size="10" font-weight="800" text-anchor="middle">-</text>
+                                <circle cx="44" cy="95" r="6" fill="#ffffff"/>
+                                <text x="44" y="98" fill="#000000" font-size="10" font-weight="800" text-anchor="middle">-</text>
+                            </svg>
+                            <div class="diagram-caption">Figure 2: Nucleus (+ Protons &amp; 0 Neutrons) surrounded by (&minus;) Electrons in energy levels</div>
+                        </div>
 
                         <h3 class="wiki-h3">Subatomic Particles</h3>
                         <ol class="wiki-olist">
@@ -1352,7 +1611,7 @@
 
                     <hr class="wiki-divider">
 
-                    <section id="quick-review" class="wiki-section">
+                    <section id="quick-review" class="wiki-section searchable-section">
                         <h2 class="wiki-h2">Quick Review</h2>
                         <ol class="wiki-olist">
                             <li><strong>Organ Systems</strong> – How body systems work together.</li>
@@ -1409,11 +1668,24 @@
                 </div>
 
                 <div id="game-term1" class="term-panel active">
-                    <div class="count-bar" role="group" aria-label="Number of Questions">
-                        <span class="count-label">Questions:</span>
-                        <button type="button" class="count-btn active" data-count="10" onclick="selectQuestionCount(10, this)">10 Questions</button>
-                        <button type="button" class="count-btn" data-count="20" onclick="selectQuestionCount(20, this)">20 Questions</button>
-                        <button type="button" class="count-btn" data-count="30" onclick="selectQuestionCount(30, this)">30 Questions</button>
+                    <div class="quiz-controls-group">
+                        <div class="count-bar" role="group" aria-label="Number of Questions">
+                            <span class="count-label">Length:</span>
+                            <button type="button" class="count-btn active" data-count="10" onclick="selectQuestionCount(10, this)">10 Questions</button>
+                            <button type="button" class="count-btn" data-count="20" onclick="selectQuestionCount(20, this)">20 Questions</button>
+                            <button type="button" class="count-btn" data-count="30" onclick="selectQuestionCount(30, this)">30 Questions</button>
+                            <span id="personal-best-badge" class="best-score-badge">Personal Best: 0 / 10</span>
+                        </div>
+
+                        <div class="topic-filter-bar" role="group" aria-label="Filter by Topic">
+                            <span class="count-label">Topic:</span>
+                            <button type="button" class="topic-pill-btn active" onclick="selectTopicFilter('ALL', this)">All Topics</button>
+                            <button type="button" class="topic-pill-btn" onclick="selectTopicFilter('Organ Systems', this)">Organ Systems</button>
+                            <button type="button" class="topic-pill-btn" onclick="selectTopicFilter('Heredity', this)">Heredity</button>
+                            <button type="button" class="topic-pill-btn" onclick="selectTopicFilter('Taxonomic Classification', this)">Taxonomy</button>
+                            <button type="button" class="topic-pill-btn" onclick="selectTopicFilter('Photosynthesis & Respiration', this)">Cycles &amp; Energy</button>
+                            <button type="button" class="topic-pill-btn" onclick="selectTopicFilter('Structure of the Atom', this)">Atoms</button>
+                        </div>
                     </div>
 
                     <div class="quiz-card">
@@ -1449,6 +1721,8 @@
                             <button type="button" class="quiz-next-btn" onclick="restartQuiz()">
                                 Play Again (Scrambled)
                             </button>
+
+                            <div id="missed-review-box" class="missed-review-box" style="display: none;"></div>
                         </div>
                     </div>
                 </div>
@@ -1530,12 +1804,22 @@
                                 <button type="submit" class="submit-btn">Unlock Student Upload</button>
                             </form>
                         {% else %}
-                            <p class="section-subtext">
-                                Unlocked: Upload assignments or project files below.
-                            </p>
+                            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+                                <p class="section-subtext" style="margin-bottom: 0;">
+                                    Unlocked: Upload assignments or project files below (max 16 MB).
+                                </p>
+                                <form method="POST" action="/files?view=student">
+                                    <input type="hidden" name="action" value="lock_student">
+                                    <button type="submit" class="secondary-btn">Lock Upload</button>
+                                </form>
+                            </div>
+
+                            <div class="storage-notice">
+                                Note: Always keep a backup copy of your assignment on your device, as temporary cloud server restarts may clear recent uploads.
+                            </div>
+
                             <form method="POST" action="/files?view=student" enctype="multipart/form-data" class="form-box">
                                 <input type="hidden" name="action" value="upload_student">
-                                <input type="hidden" name="password" value="Joven3031">
                                 <label for="student_file" class="form-label">Select File (Assignment, Lab Report, etc.)</label>
                                 <input type="file" id="student_file" name="student_file" class="file-input" required>
                                 <button type="submit" class="submit-btn">Upload File</button>
@@ -1583,6 +1867,95 @@
             clickedBtn.classList.add('active');
         }
 
+        // Live Notes Search
+        function filterNotesSections() {
+            const input = document.getElementById("notes-search-input");
+            const clearBtn = document.getElementById("notes-search-clear");
+            const emptyNotice = document.getElementById("notes-search-empty");
+            const toc = document.getElementById("notes-toc");
+            if (!input) return;
+
+            const query = input.value.trim().toLowerCase();
+            if (clearBtn) {
+                clearBtn.classList.toggle("visible", query.length > 0);
+            }
+            if (toc) {
+                toc.style.display = query.length > 0 ? "none" : "block";
+            }
+
+            const sections = document.querySelectorAll("#notes-term1 .searchable-section");
+            let visibleCount = 0;
+
+            sections.forEach(sec => {
+                const match = sec.textContent.toLowerCase().includes(query);
+                sec.style.display = match ? "block" : "none";
+                if (match) visibleCount++;
+            });
+
+            if (emptyNotice) {
+                emptyNotice.style.display = visibleCount === 0 ? "block" : "none";
+            }
+        }
+
+        function clearNotesSearch() {
+            const input = document.getElementById("notes-search-input");
+            if (input) {
+                input.value = "";
+                filterNotesSections();
+                input.focus();
+            }
+        }
+
+        // Interactive Punnett Square Calculator
+        function formatAllelePair(a, b) {
+            if (a === b) return a + b;
+            return a === "A" ? "Aa" : "Aa";
+        }
+
+        function updatePunnettSquare() {
+            const p1Select = document.getElementById("parent1-select");
+            const p2Select = document.getElementById("parent2-select");
+            if (!p1Select || !p2Select) return;
+
+            const p1 = p1Select.value;
+            const p2 = p2Select.value;
+
+            const p1a1 = p1[0], p1a2 = p1[1];
+            const p2a1 = p2[0], p2a2 = p2[1];
+
+            document.getElementById("p1-a1").textContent = p1a1;
+            document.getElementById("p1-a2").textContent = p1a2;
+            document.getElementById("p2-a1").textContent = p2a1;
+            document.getElementById("p2-a2").textContent = p2a2;
+
+            const cells = [
+                formatAllelePair(p1a1, p2a1),
+                formatAllelePair(p1a2, p2a1),
+                formatAllelePair(p1a1, p2a2),
+                formatAllelePair(p1a2, p2a2)
+            ];
+
+            document.getElementById("cell-11").textContent = cells[0];
+            document.getElementById("cell-12").textContent = cells[1];
+            document.getElementById("cell-21").textContent = cells[2];
+            document.getElementById("cell-22").textContent = cells[3];
+
+            const countAA = cells.filter(c => c === "AA").length * 25;
+            const countAa = cells.filter(c => c === "Aa").length * 25;
+            const countaa = cells.filter(c => c === "aa").length * 25;
+            const domPhenotype = countAA + countAa;
+
+            document.getElementById("punnett-summary").innerHTML = `
+                <strong>Genotype Ratio:</strong> ${countAA}% AA &bull; ${countAa}% Aa &bull; ${countaa}% aa<br>
+                <strong>Phenotype Ratio:</strong> ${domPhenotype}% Dominant trait &bull; ${countaa}% Recessive trait
+            `;
+        }
+
+        if (document.getElementById("parent1-select")) {
+            updatePunnettSquare();
+        }
+
+        // Home Page Science Fact Cycler
         const scienceFacts = [
             {
                 topic: "Photosynthesis",
@@ -1621,6 +1994,7 @@
             }
         }
 
+        // 1st Term Question Bank (30 Questions)
         const firstTermQuestionBank = [
             {
                 topic: "Organ Systems",
@@ -1874,13 +2248,31 @@
         }
 
         let selectedQuestionCount = 10;
+        let selectedTopicFilter = "ALL";
         let activeQuestions = [];
+        let missedQuestions = [];
         let currentQIndex = 0;
         let score = 0;
         let answered = false;
 
-        function buildScrambledRound(count) {
-            const pickedQuestions = shuffleArray(firstTermQuestionBank).slice(0, count);
+        function getBestScoreKey(count, topic) {
+            return `malabanan_sci_best_${topic}_${count}`;
+        }
+
+        function updatePersonalBestDisplay() {
+            const badge = document.getElementById("personal-best-badge");
+            if (!badge) return;
+            const total = activeQuestions.length || selectedQuestionCount;
+            const savedBest = parseInt(localStorage.getItem(getBestScoreKey(total, selectedTopicFilter)) || "0", 10);
+            badge.textContent = `Personal Best: ${savedBest} / ${total}`;
+        }
+
+        function buildScrambledRound(count, topicFilter) {
+            const pool = topicFilter === "ALL"
+                ? firstTermQuestionBank
+                : firstTermQuestionBank.filter(q => q.topic === topicFilter);
+
+            const pickedQuestions = shuffleArray(pool).slice(0, count);
             return pickedQuestions.map(q => {
                 const scrambledOptions = shuffleArray(q.options);
                 return {
@@ -1893,13 +2285,16 @@
             });
         }
 
-        function startNewGameRound(count = selectedQuestionCount) {
+        function startNewGameRound(count = selectedQuestionCount, topicFilter = selectedTopicFilter) {
             selectedQuestionCount = count;
-            activeQuestions = buildScrambledRound(count);
+            selectedTopicFilter = topicFilter;
+            activeQuestions = buildScrambledRound(count, topicFilter);
+            missedQuestions = [];
             currentQIndex = 0;
             score = 0;
             answered = false;
 
+            updatePersonalBestDisplay();
             document.getElementById("quiz-result-view").style.display = "none";
             document.getElementById("quiz-active-view").style.display = "block";
             renderQuestion();
@@ -1910,7 +2305,15 @@
             if (clickedBtn) {
                 clickedBtn.classList.add("active");
             }
-            startNewGameRound(count);
+            startNewGameRound(count, selectedTopicFilter);
+        }
+
+        function selectTopicFilter(topic, clickedBtn) {
+            document.querySelectorAll(".topic-pill-btn").forEach(btn => btn.classList.remove("active"));
+            if (clickedBtn) {
+                clickedBtn.classList.add("active");
+            }
+            startNewGameRound(selectedQuestionCount, topic);
         }
 
         function renderQuestion() {
@@ -1977,6 +2380,12 @@
                 document.getElementById("quiz-score-text").textContent = `Score: ${score}`;
                 feedbackBox.innerHTML = `<strong>Correct!</strong> ${qData.explanation}`;
             } else {
+                missedQuestions.push({
+                    question: qData.question,
+                    yourAnswer: chosenText,
+                    correctAnswer: qData.correctAnswer,
+                    explanation: qData.explanation
+                });
                 feedbackBox.innerHTML = `<strong>Not quite.</strong> ${qData.explanation}`;
             }
 
@@ -2003,6 +2412,13 @@
             const ratio = score / total;
             document.getElementById("result-score").textContent = `${score} / ${total}`;
 
+            const bestKey = getBestScoreKey(total, selectedTopicFilter);
+            const prevBest = parseInt(localStorage.getItem(bestKey) || "0", 10);
+            if (score > prevBest) {
+                localStorage.setItem(bestKey, String(score));
+            }
+            updatePersonalBestDisplay();
+
             let msg = "Good effort! Review your 1st Term notes and try the scrambled round again.";
             if (ratio === 1) {
                 msg = "Perfect score! You mastered Grade 8 Science First Term.";
@@ -2010,14 +2426,31 @@
                 msg = "Great job! You know your First Term concepts well.";
             }
             document.getElementById("result-msg").textContent = msg;
+
+            const missedBox = document.getElementById("missed-review-box");
+            if (missedQuestions.length > 0) {
+                missedBox.style.display = "block";
+                missedBox.innerHTML = `<h3 style="font-size:1.1rem; margin-bottom:12px;">Review Missed Questions (${missedQuestions.length})</h3>` +
+                    missedQuestions.map(m => `
+                        <div class="missed-item">
+                            <strong>Q: ${m.question}</strong><br>
+                            Your answer: <span style="color:#ffb3b3;">${m.yourAnswer}</span> &bull;
+                            Correct: <span style="color:#9effc3;">${m.correctAnswer}</span><br>
+                            <span style="color:#cfcfcf;">${m.explanation}</span>
+                        </div>
+                    `).join("");
+            } else {
+                missedBox.style.display = "none";
+                missedBox.innerHTML = "";
+            }
         }
 
         function restartQuiz() {
-            startNewGameRound(selectedQuestionCount);
+            startNewGameRound(selectedQuestionCount, selectedTopicFilter);
         }
 
         if (document.getElementById("quiz-question")) {
-            startNewGameRound(10);
+            startNewGameRound(10, "ALL");
         }
     </script>
 
